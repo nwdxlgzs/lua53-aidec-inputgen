@@ -1,2 +1,6 @@
 # lua53-aidec-inputgen
 一种Lua53字节码解析工具，输出非常具有格式化，可以在加入特定token的AI模型里做数据集
+
+基础词典来自2.7GB的Lua代码文件进行的32K的BPE
+然后再加上本工具的自定义特殊token以及对话用的两个token
+一共37009个token
