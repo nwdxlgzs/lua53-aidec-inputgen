@@ -264,7 +264,7 @@ class InstructionUtils:
 
     @staticmethod
     def getarg(i, pos, size):
-        return (i >> pos) & InstructionUtils.MASK1(size, pos)
+        return int((i >> pos) & InstructionUtils.MASK1(size, 0))
 
     @staticmethod
     def setarg(i, v, pos, size):
@@ -591,104 +591,104 @@ class LuaTValue:
 
 
 OpDefines = [
-    # op-code | op-name | T | A | B | C | mode | inline
+    # op-code | op-name | T | A | B | C | mode | inline | jump
     (0, "OP_MOVE", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (1, "OP_LOADK", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgN, OpMode.iABx,
-     lambda i: False),
+     lambda i: False, False),
     (2, "OP_LOADKX", 0, 1, OpArgMask.OpArgN, OpArgMask.OpArgN, OpMode.iABx,
-     lambda i: True),
+     lambda i: True, False),
     (3, "OP_LOADBOOL", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: i.C != 0),
+     lambda i: i.C != 0, False),
     (4, "OP_LOADNIL", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (5, "OP_GETUPVAL", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (6, "OP_GETTABUP", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (7, "OP_GETTABLE", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (8, "OP_SETTABUP", 0, 0, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (9, "OP_SETUPVAL", 0, 0, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (10, "OP_SETTABLE", 0, 0, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (11, "OP_NEWTABLE", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (12, "OP_SELF", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (13, "OP_ADD", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (14, "OP_SUB", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (15, "OP_MUL", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (16, "OP_MOD", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (17, "OP_POW", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (18, "OP_DIV", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (19, "OP_IDIV", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (20, "OP_BAND", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (21, "OP_BOR", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (22, "OP_BXOR", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (23, "OP_SHL", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (24, "OP_SHR", 0, 1, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (25, "OP_UNM", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (26, "OP_BNOT", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (27, "OP_NOT", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (28, "OP_LEN", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (29, "OP_CONCAT", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgR, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (30, "OP_JMP", 0, 0, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iAsBx,
-     lambda i: False),
+     lambda i: False, True),
     (31, "OP_EQ", 1, 0, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (32, "OP_LT", 1, 0, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (33, "OP_LE", 1, 0, OpArgMask.OpArgK, OpArgMask.OpArgK, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (34, "OP_TEST", 1, 0, OpArgMask.OpArgN, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (35, "OP_TESTSET", 1, 1, OpArgMask.OpArgR, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (36, "OP_CALL", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (37, "OP_TAILCALL", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (38, "OP_RETURN", 0, 0, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (39, "OP_FORLOOP", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iAsBx,
-     lambda i: False),
+     lambda i: False, True),
     (40, "OP_FORPREP", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iAsBx,
-     lambda i: False),
+     lambda i: False, True),
     (41, "OP_TFORCALL", 0, 0, OpArgMask.OpArgN, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: True),
+     lambda i: True, False),
     (42, "OP_TFORLOOP", 0, 1, OpArgMask.OpArgR, OpArgMask.OpArgN, OpMode.iAsBx,
-     lambda i: False),
+     lambda i: False, True),
     (43, "OP_SETLIST", 0, 0, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iABC,
-     lambda i: i.C == 0),
+     lambda i: i.C == 0, False),
     (44, "OP_CLOSURE", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABx,
-     lambda i: False),
+     lambda i: False, False),
     (45, "OP_VARARG", 0, 1, OpArgMask.OpArgU, OpArgMask.OpArgN, OpMode.iABC,
-     lambda i: False),
+     lambda i: False, False),
     (46, "OP_EXTRAARG", 0, 0, OpArgMask.OpArgU, OpArgMask.OpArgU, OpMode.iAx,
-     lambda i: False),
+     lambda i: False, False),
     # 超长常规定义范围的指令
     (-1, "OP_UNKNOWN", 0, 0, OpArgMask.OpArgNone, OpArgMask.OpArgNone, OpMode.iNone,
-     lambda i: False),
+     lambda i: False, False),
 ]
 
 
@@ -729,6 +729,8 @@ class Instruction:
         buff.append(
             f"<|Instruction-MODE={OpMode.tostr(self.opmode)}|>")  # mode
         buff.append(f"<|Instruction-INLINE={self.opdef[7](self)}|>")  # inline
+        buff.append(
+            f"<|Instruction-JUMP={'true' if self.opdef[8] else 'false'}|>")  # jump
         buff.append(f"<|Instruction-A={self.A}|>")
         buff.append(f"<|Instruction-B={self.B}|>")
         buff.append(f"<|Instruction-C={self.C}|>")
@@ -928,11 +930,25 @@ class Proto:
             result.append(str(k))
         result.append("<|/Proto-k|>")
         result.append("<|Proto-code|>")
+        # 内联JMP情况
+        forceJump = False
         for idx, code in enumerate(self.code):
             result.append("<|Proto-code-idx|>")
             result.append(str(idx))
             result.append("<|/Proto-code-idx|>")
             result.append(str(code))
+            # 辅助提前识别跳转的目标地址情况
+            if code.opdef[8]:
+                forceJump = True
+            if forceJump:
+                targetIdx = idx + 1 + code.sBx
+                if targetIdx >= 0 and targetIdx < len(self.code):
+                    result.append("<|Jump-Target|>")
+                    result.append(str(targetIdx))
+                    result.append("<|/Jump-Target|>")
+            forceJump = False
+            if code.opdef[1] in {"OP_TFORCALL", "OP_TESTSET", "OP_TEST", "OP_LE", "OP_LT", "OP_EQ"}:
+                forceJump = True
         result.append("<|/Proto-code|>")
         result.append("<|Proto-lineinfo|>")
         result.append(str(self.lineinfo))
@@ -1207,9 +1223,6 @@ def main():
         parser = LuaBytecodeParser(data)
         proto = parser.parse()
 
-        print("Lua 5.3 Bytecode Analysis:")
-        print("=" * 50)
-        print(proto)
         with open("luac.lasm", 'w', encoding='utf-8') as f:
             f.write(str(proto))
 
