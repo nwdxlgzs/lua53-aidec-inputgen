@@ -728,7 +728,7 @@ class Instruction:
         buff.append(f"<|Instruction-C-R={self.C}|>")  # REG(C)
         buff.append(
             f"<|Instruction-MODE={OpMode.tostr(self.opmode)}|>")  # mode
-        buff.append(f"<|Instruction-INLINE={self.opdef[7](self)}|>")  # inline
+        buff.append(f"<|Instruction-INLINE={'true' if self.opdef[7](self) else 'false'}|>")  # inline
         buff.append(
             f"<|Instruction-JUMP={'true' if self.opdef[8] else 'false'}|>")  # jump
         buff.append(f"<|Instruction-A={self.A}|>")
