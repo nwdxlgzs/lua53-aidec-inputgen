@@ -728,7 +728,8 @@ class Instruction:
         buff.append(f"<|Instruction-C-R={self.C}|>")  # REG(C)
         buff.append(
             f"<|Instruction-MODE={OpMode.tostr(self.opmode)}|>")  # mode
-        buff.append(f"<|Instruction-INLINE={'true' if self.opdef[7](self) else 'false'}|>")  # inline
+        buff.append(
+            f"<|Instruction-INLINE={'true' if self.opdef[7](self) else 'false'}|>")  # inline
         buff.append(
             f"<|Instruction-JUMP={'true' if self.opdef[8] else 'false'}|>")  # jump
         buff.append(f"<|Instruction-A={self.A}|>")
@@ -846,6 +847,7 @@ class LineInfo:
         self.lines.append(line)
 
     def __str__(self):
+        if len(self.lines) == 0: return ""
         buff = ["<|LineInfo|>"]
         for line in self.lines:
             buff.append(str(line))
@@ -992,10 +994,11 @@ class LuaBytecodeParser:
     LUAC_INT = 0x5678
     LUAC_NUM = 370.5
 
-    def __init__(self, data, little_endian=True):
+    def __init__(self, data, little_endian=True, strip=False):
         self.data = data
         self.pos = 0
         self.endian = '<' if little_endian else '>'
+        self.strip = strip
 
     def read_byte(self):
         if self.pos >= len(self.data):
@@ -1161,22 +1164,25 @@ class LuaBytecodeParser:
 
     def read_debug(self, proto):
         n = self.read_int()
-        proto.sizelineinfo = n
+        proto.sizelineinfo = 0 if self.strip else n
         for _ in range(n):
             line = self.read_int()
-            proto.lineinfo.add(line)
+            if not self.strip:
+                proto.lineinfo.add(line)
         n = self.read_int()
-        proto.sizelocvars = n
+        proto.sizelocvars = 0 if self.strip else n
         for _ in range(n):
             varname = self.read_string()
             startpc = self.read_int()
             endpc = self.read_int()
-            proto.locvars.append(
-                LocVar(varname=varname, startpc=startpc, endpc=endpc))
+            if not self.strip:
+                proto.locvars.append(
+                    LocVar(varname=varname, startpc=startpc, endpc=endpc))
         n = self.read_int()
         for i in range(n):
             name = self.read_string()
-            proto.upvalues[i].updateName(name)
+            if not self.strip:
+                proto.upvalues[i].updateName(name)
 
     def load_function(self, parent_source=None):
         proto = Proto()
@@ -1220,7 +1226,7 @@ def main():
         with open(filename, 'rb') as f:
             data = f.read()
 
-        parser = LuaBytecodeParser(data)
+        parser = LuaBytecodeParser(data=data, little_endian=True, strip=True)
         proto = parser.parse()
 
         with open("luac.lasm", 'w', encoding='utf-8') as f:
