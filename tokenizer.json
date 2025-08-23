@@ -23,7 +23,7 @@
     },
     {
       "id": 2,
-      "content": "<|TOKEN:bos|>",
+      "content": "<|endoftext|>",
       "single_word": false,
       "lstrip": false,
       "rstrip": false,
@@ -32,7 +32,7 @@
     },
     {
       "id": 3,
-      "content": "<|TOKEN:eos|>",
+      "content": "<|im_end|>",
       "single_word": false,
       "lstrip": false,
       "rstrip": false,
@@ -38198,15 +38198,6 @@
       "rstrip": false,
       "normalized": false,
       "special": true
-    },
-    {
-      "id": 37008,
-      "content": "<|im_end|>",
-      "single_word": false,
-      "lstrip": false,
-      "rstrip": false,
-      "normalized": false,
-      "special": true
     }
   ],
   "normalizer": null,
@@ -38230,8 +38221,8 @@
     "vocab": {
       "<|TOKEN:pad|>": 0,
       "<|TOKEN:unk|>": 1,
-      "<|TOKEN:bos|>": 2,
-      "<|TOKEN:eos|>": 3,
+      "<|endoftext|>": 2,
+      "<|im_end|>": 3,
       "!": 4,
       "\"": 5,
       "#": 6,
