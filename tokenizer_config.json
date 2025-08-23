@@ -17,7 +17,7 @@
       "special": true
     },
     "2": {
-      "content": "<|TOKEN:bos|>",
+      "content": "<|endoftext|>",
       "lstrip": false,
       "normalized": false,
       "rstrip": false,
@@ -25,7 +25,7 @@
       "special": true
     },
     "3": {
-      "content": "<|TOKEN:eos|>",
+      "content": "<|im_end|>",
       "lstrip": false,
       "normalized": false,
       "rstrip": false,
@@ -33951,14 +33951,6 @@
       "rstrip": false,
       "single_word": false,
       "special": true
-    },
-    "37008": {
-      "content": "<|im_end|>",
-      "lstrip": false,
-      "normalized": false,
-      "rstrip": false,
-      "single_word": false,
-      "special": true
     }
   },
   "additional_special_tokens": [
@@ -38201,12 +38193,11 @@
     "\\xFD",
     "\\xFE",
     "\\xFF",
-    "<|im_start|>",
-    "<|im_end|>"
+    "<|im_start|>"
   ],
-  "bos_token": "<|TOKEN:bos|>",
+  "bos_token": "<|endoftext|>",
   "clean_up_tokenization_spaces": false,
-  "eos_token": "<|TOKEN:eos|>",
+  "eos_token": "<|im_end|>",
   "extra_special_tokens": {},
   "model_max_length": 1000000000000000019884624838656,
   "pad_token": "<|TOKEN:pad|>",
