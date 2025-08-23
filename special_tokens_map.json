@@ -29679,24 +29679,17 @@
       "normalized": false,
       "rstrip": false,
       "single_word": false
-    },
-    {
-      "content": "<|im_end|>",
-      "lstrip": false,
-      "normalized": false,
-      "rstrip": false,
-      "single_word": false
     }
   ],
   "bos_token": {
-    "content": "<|TOKEN:bos|>",
+    "content": "<|endoftext|>",
     "lstrip": false,
     "normalized": false,
     "rstrip": false,
     "single_word": false
   },
   "eos_token": {
-    "content": "<|TOKEN:eos|>",
+    "content": "<|im_end|>",
     "lstrip": false,
     "normalized": false,
     "rstrip": false,
