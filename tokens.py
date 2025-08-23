@@ -259,7 +259,7 @@ with open("Atokens.txt", "w") as f:
     for token in sorted(TOKEN_SET):
         f.write(token + "\n")
 special_tokens = {
-    "additional_special_tokens": list(sorted(TOKEN_SET))+["<|im_start|>","<|im_end|>"]
+    "additional_special_tokens": list(sorted(TOKEN_SET))+["<|im_start|>"]
 }
 tokenizer.add_special_tokens(special_tokens)
 tokenizer.save_pretrained("lua-bpe-32k-Add")
