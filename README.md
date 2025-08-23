@@ -3,9 +3,9 @@
 
 基础词典来自2.7GB的Lua代码文件进行的32K的BPE
 
-然后再加上本工具的自定义特殊token以及对话用的两个token
+然后再加上本工具的自定义特殊token以及对话用的1个token（EOS在32K里）
 
-一共37009个token
+一共37008个token
 
 # 建议的SFT-ChatML
 源码：
