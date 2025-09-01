@@ -1130,10 +1130,10 @@ class LuaBytecodeParser:
                     LuaTValue(value_=True if b != 0 else False, tt_=LuaTValueUtils.LUA_TBOOLEAN)))
             elif t == LuaTValueUtils.LUA_TNUMFLT:
                 proto.k.append(LuaConstant(
-                    LuaTValue(value_=self.read_luaint(), tt_=LuaTValueUtils.LUA_TNUMFLT)))
+                    LuaTValue(value_=self.read_luaflt(), tt_=LuaTValueUtils.LUA_TNUMFLT)))
             elif t == LuaTValueUtils.LUA_TNUMINT:
                 proto.k.append(LuaConstant(
-                    LuaTValue(value_=self.read_luaflt(), tt_=LuaTValueUtils.LUA_TNUMINT)))
+                    LuaTValue(value_=self.read_luaint(), tt_=LuaTValueUtils.LUA_TNUMINT)))
             elif t == LuaTValueUtils.LUA_TSHRSTR or t == LuaTValueUtils.LUA_TLNGSTR:
                 proto.k.append(LuaConstant(self.read_string()))
             else:
@@ -1240,3 +1240,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
