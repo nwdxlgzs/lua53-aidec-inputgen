@@ -840,7 +840,7 @@ class LocVar:
 
 
 class LineInfo:
-    def __init__(self, lines=[]):
+    def __init__(self, lines):
         self.lines = lines
 
     def add(self, line):
@@ -883,7 +883,7 @@ class Proto:
         self.lastlinedefined = 0  # int
         self.k = []  # LuaTValue[]
         self.code = []  # Instruction[]
-        self.lineinfo = LineInfo()
+        self.lineinfo = LineInfo([])
         self.locvars = []  # LocVar[]
         self.upvalues = []  # UpValue[]
         self.source = None
@@ -1240,5 +1240,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
