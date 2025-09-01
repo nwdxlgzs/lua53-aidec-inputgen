@@ -1158,7 +1158,7 @@ class LuaBytecodeParser:
 
     def load_code(self, proto):
         n = self.read_int()
-        proto.sizep = n
+        proto.sizecode = n
         for _ in range(n):
             proto.code.append(self.read_instruction())
 
@@ -1240,4 +1240,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
