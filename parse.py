@@ -331,9 +331,10 @@ class InstructionUtils:
         return (o << InstructionUtils.POS_OP) + (a << InstructionUtils.POS_Ax)
 
     @staticmethod
-    def CREATE_sBx(o, a, sbx):
-        i = InstructionUtils.CREATE_ABx(o, a, 0)
-        return InstructionUtils.SETARG_sBx(i, sbx)
+    def CREATE_AsBx(o, a, sbx):
+        i = (o << InstructionUtils.POS_OP) + (a << InstructionUtils.POS_A)
+        i = InstructionUtils.SETARG_sBx(i, sbx)
+        return Instruction(i)
 
 
 class OpMode:
@@ -1240,6 +1241,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
