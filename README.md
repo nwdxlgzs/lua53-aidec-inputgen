@@ -7,6 +7,8 @@
 
 一共37010个token
 
+> `LuaCopilot_bbpe_48k.zip`是我后来重新基于更大规模（4.2G的lua+8105常用汉字）训练的新的原始的分词器，能把Lua代码转换为1/5量（bytes->int）tokens的新分词器。这样一般来说4mb以内的lua文件都可以一次喂进1m的模型里
+
 # 建议的SFT-ChatML
 源码：
 ```lua
